@@ -1,5 +1,8 @@
 import { BookOpenCheck, UserRound, Waypoints } from "lucide-react";
 import { CardSummary } from "../components/CardSummary";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../authOptions";
+import { redirect } from "next/navigation";
 
 const dataCardSummary = [
   {
@@ -25,7 +28,14 @@ const dataCardSummary = [
   },
 ];
 
-const DashboardPage = () => {
+const DashboardPage = async () => {
+  const session = await getServerSession(authOptions);
+  console.log(session);
+
+  if (!session.user.name) {
+    redirect("/auth/login");
+  }
+
   return (
     <div>
       <h1>DashBoard</h1>

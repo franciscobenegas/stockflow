@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={noto.className}>
         <SessionProvider>
           <div className="flex w-full h-full">
-            <div className="hidden xl:block w-80 h-full xl:fixed">sidebar</div>
+            <div className="hidden xl:block w-80 h-full xl:fixed">sidebar1</div>
             <div className="w-full xl:ml-80">
               <Navbar />
               <div className="p-6 bg-[#fafbfc] dark:bg-secondary">

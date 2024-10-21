@@ -1,13 +1,16 @@
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "./authOptions";
+// import { getServerSession } from "next-auth/next";
+// import { authOptions } from "./authOptions";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const session = await getServerSession(authOptions);
-  console.log(session);
+  // const session = await getServerSession(authOptions);
+  // console.log(session);
+
+  redirect("/dashboard");
 
   return (
-    <section className="flex justify-center items-center mt-32">
-      <h1 className="text-5xl">Home Page</h1>
-    </section>
+    <div>
+      <h1>Redireccionando al Dashborad</h1>
+    </div>
   );
 }
