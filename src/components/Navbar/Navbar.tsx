@@ -18,6 +18,7 @@ import { useSession } from "next-auth/react";
 // import { authOptions } from "@/app/authOptions";
 import { signIn, signOut } from "next-auth/react";
 import { LoadingPage } from "../../app/components/LoadingPage";
+import { SidebarRoutes } from "../SidebarRoutes";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
@@ -37,7 +38,7 @@ export default function Navbar() {
               <Menu />
             </SheetTrigger>
             <SheetContent side="left">
-              <p>SideBar Router</p>
+              <SidebarRoutes />
             </SheetContent>
           </Sheet>
         </div>

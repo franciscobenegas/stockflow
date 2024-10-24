@@ -3,6 +3,8 @@ import { Noto_Sans_Display } from "next/font/google";
 import "./globals.css";
 import SessionProvider from "../app/components/SessionProvider";
 import Navbar from "@/components/Navbar/Navbar";
+import { Sidebar } from "@/components/Sidebar";
+
 const noto = Noto_Sans_Display({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,7 +23,9 @@ export default function RootLayout({
       <body className={noto.className}>
         <SessionProvider>
           <div className="flex w-full h-full">
-            <div className="hidden xl:block w-80 h-full xl:fixed">sidebar1</div>
+            <div className="hidden xl:block w-80 h-full xl:fixed">
+              <Sidebar />
+            </div>
             <div className="w-full xl:ml-80">
               <Navbar />
               <div className="p-6 bg-[#fafbfc] dark:bg-secondary">
