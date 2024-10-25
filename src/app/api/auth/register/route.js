@@ -6,7 +6,6 @@ import prisma from "@/libs/prisma";
 export async function POST(request) {
   try {
     const data = await request.json();
-    console.log(data);
 
     const emailFount = await prisma.user.findUnique({
       where: {

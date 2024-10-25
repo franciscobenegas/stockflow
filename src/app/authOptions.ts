@@ -18,8 +18,6 @@ export const authOptions = {
       // async authorize(credentials, req) {
 
       async authorize(credentials) {
-        console.log(credentials);
-
         const userFount = await prisma.user.findUnique({
           where: {
             email: credentials?.email,

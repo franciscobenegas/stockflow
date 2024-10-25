@@ -22,8 +22,6 @@ export default function NewRegisterPage() {
   const router = useRouter();
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
-
     const resp = await fetch("/api/auth/register", {
       method: "POST",
       body: JSON.stringify({

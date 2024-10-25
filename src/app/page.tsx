@@ -2,9 +2,8 @@
 // import { authOptions } from "./authOptions";
 import { redirect } from "next/navigation";
 
-export default async function Home() {
+export default function Home() {
   // const session = await getServerSession(authOptions);
-  // console.log(session);
 
   redirect("/dashboard");
 

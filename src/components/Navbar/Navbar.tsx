@@ -19,6 +19,7 @@ import { useSession } from "next-auth/react";
 import { signIn, signOut } from "next-auth/react";
 import { LoadingPage } from "../../app/components/LoadingPage";
 import { SidebarRoutes } from "../SidebarRoutes";
+import { ToggleTheme } from "../ToggleTheme";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
@@ -30,9 +31,9 @@ export default function Navbar() {
   }
 
   return (
-    <div className={session?.user?.name ? "block" : "hidden"}>
+    <nav className={session?.user?.name ? "block" : "hidden"}>
       <div className="flex items-center px-2 gap-x-4 md:px-6 justify-between w-full bg-background border-b h-20 ">
-        <div className="block md:hidden">
+        <div className="block xl:hidden">
           <Sheet>
             <SheetTrigger className="flex items-center">
               <Menu />
@@ -47,7 +48,9 @@ export default function Navbar() {
           <Search strokeWidth={1} className="absolute top-2 right-2" />
         </div>
         <div className="flex gap-x-2 items-center">
-          <p>toogleTheme</p>
+          <div className="mr-2">
+            <ToggleTheme />
+          </div>
           <div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -81,11 +84,13 @@ export default function Navbar() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem>
-                    <div onClick={() => signIn()}>Iniciar</div>
-                  </DropdownMenuItem>
+                  <div className={session?.user?.name ? "hidden" : "block"}>
+                    <DropdownMenuItem>
+                      <div onClick={() => signIn()}>Iniciar</div>
+                    </DropdownMenuItem>
+                  </div>
+                  <DropdownMenuItem>Configuraciones</DropdownMenuItem>
                   <DropdownMenuItem>Ayuda</DropdownMenuItem>
-                  <DropdownMenuItem>Detalles</DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
@@ -102,6 +107,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 }

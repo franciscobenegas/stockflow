@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { LoaderCircle } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Logo } from "@/components/Logo";
 
 type FormValues = {
   email: string;
@@ -26,17 +27,15 @@ export default function LoginPage() {
   const router = useRouter();
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
     const resp = await signIn("credentials", {
       email: data.email,
       password: data.password,
       redirect: false,
     });
-    console.log(resp);
+
     if (!resp?.ok) {
       alert(resp?.error);
     } else {
-      console.log("redireccionar a DASHBORD...");
       router.push("/dashboard");
       router.refresh();
     }
@@ -46,9 +45,8 @@ export default function LoginPage() {
     <div className="h-[calc(100vh-7rem)] flex justify-center items-center mx-5">
       <form onSubmit={onSubmit}>
         <div className="flex flex-col min-h-screen pt-32 sm:pt-20">
-          <h1 className="text-4xl mb-5 text-sky-600 mt-10">
-            Ingresar | StockFlow
-          </h1>
+          <Logo />
+          <h1 className="text-4xl mb-5 text-sky-600 mt-10">Ingresar | Admin</h1>
 
           <div className="flex flex-col">
             <label htmlFor="email">Correo electrónico</label>
