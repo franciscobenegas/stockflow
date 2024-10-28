@@ -3,6 +3,8 @@ import { CardSummary } from "../components/CardSummary";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../authOptions";
 import { redirect } from "next/navigation";
+import { UltimosClientes } from "../components/UltimosClientes";
+import { SalesDistributors } from "../components/SalesDistributors";
 
 const dataCardSummary = [
   {
@@ -50,6 +52,11 @@ const DashboardPage = async () => {
             tooltipText={tooltipText}
           />
         ))}
+      </div>
+      <div className="grid grid-cols-1 xl:grid-cols-2 md:gap-x-10 mt-12 ">
+        <UltimosClientes />
+
+        <SalesDistributors />
       </div>
     </div>
   );
