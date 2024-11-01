@@ -5,6 +5,8 @@ import { authOptions } from "../authOptions";
 import { redirect } from "next/navigation";
 import { UltimosClientes } from "../components/UltimosClientes";
 import { SalesDistributors } from "../components/SalesDistributors";
+import { TotalSuscripciones } from "../components/TotalSuscripciones";
+import { ListaIntegrados } from "../components/ListaIntegrados";
 
 const dataCardSummary = [
   {
@@ -57,6 +59,10 @@ const DashboardPage = async () => {
         <UltimosClientes />
 
         <SalesDistributors />
+      </div>
+      <div className="flex-col xl:flex xl:flex-row gap-y-4 md:gap-y-0 mt-12 md:mt-10 justify-center md:gap-x-10">
+        <TotalSuscripciones />
+        <ListaIntegrados />
       </div>
     </div>
   );

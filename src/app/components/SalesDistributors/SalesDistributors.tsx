@@ -5,7 +5,7 @@ import { Grafico } from "../Grafico";
 
 export function SalesDistributors() {
   return (
-    <div className="shadow-sm bg-background rounded-lg p-5">
+    <div className="shadow-sm bg-background rounded-lg p-5 hover:shadow-lg transition">
       <div className="flex gap-x-2 items-center">
         <div className="shadow-md">
           <CustomIcon icon={BarChart} />
