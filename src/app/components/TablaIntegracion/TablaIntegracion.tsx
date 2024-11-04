@@ -45,15 +45,15 @@ const data: TableIntegrationProps[] = [
     profit: 450,
   },
   {
-    app: "Zapier",
-    icon: "/image/zapier.png",
+    app: "Slack",
+    icon: "https://a.slack-edge.com/fd21de4/marketing/img/nav/logo.svg",
     type: "CRM",
     rate: 20,
     profit: 120.5,
   },
   {
     app: "Shopify",
-    icon: "/image/shopify.png",
+    icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6zpvhC0euHbpxlVe45p1ZaKZgX2GEyOe-WyrmsdyMe9MNvgDJdqsFnZ3LDeQ_9W8aD48&usqp=CAU",
     type: "MarketPlace",
     rate: 80,
     profit: 963,
