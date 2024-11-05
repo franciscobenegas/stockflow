@@ -16,7 +16,7 @@ import { FormCliente } from "../FormCliente";
 export function HeaderClientes() {
   const [openModal, setOpenModal] = useState(false);
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center ">
       <h2 className="text-2xl">Listado de Clientes</h2>
 
       <Dialog open={openModal} onOpenChange={setOpenModal}>
@@ -25,8 +25,8 @@ export function HeaderClientes() {
         </DialogTrigger>
         <DialogContent className="sm:max-w-[625px]">
           <DialogHeader>
-            <DialogTitle>Crear Cliente</DialogTitle>
-            <DialogDescription>Crear y configurar un cliente</DialogDescription>
+            <DialogTitle>Cliente</DialogTitle>
+            <DialogDescription>Crear y editar cliente</DialogDescription>
           </DialogHeader>
 
           <FormCliente />

@@ -63,15 +63,16 @@ export function FormCliente() {
     // ✅ This will be type-safe and validated.
     console.log(values);
     toast({
-      title: "Scheduled: Catch up",
-      description: "Friday, February 10, 2023 at 5:57 PM",
+      title: "Exito!!! 😃",
+      description: "Los datos fueron guardados",
+      variant: "successful",
     });
   };
 
   return (
     <div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
           <div className="grid grid-cols-2 gap-3">
             <FormField
               control={form.control}
@@ -175,7 +176,7 @@ export function FormCliente() {
             />
           </div>
           <Button type="submit" disabled={!isValid}>
-            Submit
+            Guardar
           </Button>
         </form>
       </Form>
