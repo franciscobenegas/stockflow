@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-// import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
   nombre: z.string().min(10),
@@ -39,7 +39,7 @@ const formSchema = z.object({
 // }
 
 export function FormCliente() {
-  //   const { toast } = useToast();
+  const { toast } = useToast();
   //   const { setOpenModal } = props;
 
   // 1. Define your form.
@@ -62,10 +62,10 @@ export function FormCliente() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
-    // toast({
-    //   title: "Scheduled: Catch up",
-    //   description: "Friday, February 10, 2023 at 5:57 PM",
-    // });
+    toast({
+      title: "Scheduled: Catch up",
+      description: "Friday, February 10, 2023 at 5:57 PM",
+    });
   };
 
   return (
