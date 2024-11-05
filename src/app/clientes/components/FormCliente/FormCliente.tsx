@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Dispatch, SetStateAction, useState } from "react";
+// import { Dispatch, SetStateAction, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -20,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
   nombre: z.string().min(10),
@@ -31,16 +32,15 @@ const formSchema = z.object({
     .email("N es un correo electrónico válido."),
   direccion: z.string(),
   tipo: z.string(),
-  imagen: z.string(),
 });
 
-interface FormProps {
-  setOpenModal: Dispatch<SetStateAction<boolean>>;
-}
+// interface FormProps {
+//   setOpenModal: Dispatch<SetStateAction<boolean>>;
+// }
 
-export function FormCliente(props: FormProps) {
-  const { setOpenModal } = props;
-  const [phptoUpLoader, setPhptoUpLoader] = useState(false);
+export function FormCliente() {
+  const { toast } = useToast();
+  //   const { setOpenModal } = props;
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -51,7 +51,6 @@ export function FormCliente(props: FormProps) {
       telefono: "",
       email: "",
       direccion: "",
-      imagen: "",
       tipo: "",
     },
   });
@@ -63,6 +62,10 @@ export function FormCliente(props: FormProps) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
+    toast({
+      title: "Scheduled: Catch up",
+      description: "Friday, February 10, 2023 at 5:57 PM",
+    });
   };
 
   return (
@@ -105,7 +108,11 @@ export function FormCliente(props: FormProps) {
                 <FormItem>
                   <FormLabel>Teléfono</FormLabel>
                   <FormControl>
-                    <Input placeholder="Teléfono ..." type="text" {...field} />
+                    <Input
+                      placeholder="(+595) 981222333 ..."
+                      type="text"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -157,7 +164,7 @@ export function FormCliente(props: FormProps) {
                     </FormControl>
                     <SelectContent>
                       <SelectItem value="taller">Taller</SelectItem>
-                      <SelectItem value="particular">PArticular</SelectItem>
+                      <SelectItem value="particular">Particular</SelectItem>
                       <SelectItem value="comercio">Comercio</SelectItem>
                       <SelectItem value="NA">Otro</SelectItem>
                     </SelectContent>
@@ -167,7 +174,9 @@ export function FormCliente(props: FormProps) {
               )}
             />
           </div>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={!isValid}>
+            Submit
+          </Button>
         </form>
       </Form>
     </div>

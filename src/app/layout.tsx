@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "./authOptions";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const noto = Noto_Sans_Display({ subsets: ["latin"] });
 
@@ -45,6 +46,7 @@ export default async function RootLayout({
                 <Navbar />
                 <div className="p-6 bg-[#fafbfc] dark:bg-secondary">
                   {children}
+                  <Toaster />
                 </div>
               </div>
             </div>
