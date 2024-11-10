@@ -25,7 +25,7 @@ import { useRouter } from "next/navigation";
 import { LoaderCircle } from "lucide-react";
 
 const formSchema = z.object({
-  nombre: z.string().min(10),
+  nombre: z.string().min(5),
   ruc: z.string().min(2),
   telefono: z.string(),
   email: z
