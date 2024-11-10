@@ -167,7 +167,9 @@ export const columns: ColumnDef<Cliente>[] = [
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() =>
-                navigator.clipboard.writeText(row.original.direccion)
+                navigator.clipboard.writeText(
+                  `${row.original.nombre}\n ${row.original.direccion}\n ${row.original.telefono} \n ${row.original.email}`
+                )
               }
             >
               <Clipboard className="w-4 h-4 mr-2" />
