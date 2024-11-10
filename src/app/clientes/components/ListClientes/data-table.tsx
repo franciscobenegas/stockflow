@@ -41,6 +41,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import ExportExcelButton from "./ExportExcelButton";
 
 // import Link from "next/link";
 
@@ -205,13 +206,14 @@ export function DataTable({ data }: DataTableProps) {
 
   return (
     <div className="p-4 bg-background shadow-md rounded-lg mt-4">
-      <div className="flex items-center mb-2 gap-5">
+      <div className="flex-row md:flex items-center mb-2 gap-5">
         <Input
           placeholder="Filtrar por Nombre..."
           value={(table.getColumn("nombre")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("nombre")?.setFilterValue(event.target.value)
           }
+          className="mb-2 md:mb-0"
         />
         <Input
           placeholder="Filtrar por RUC..."
@@ -219,6 +221,7 @@ export function DataTable({ data }: DataTableProps) {
           onChange={(event) =>
             table.getColumn("ruc")?.setFilterValue(event.target.value)
           }
+          className="mb-2 md:mb-0"
         />
         <Input
           placeholder="Filtrar por Correo..."
@@ -226,6 +229,7 @@ export function DataTable({ data }: DataTableProps) {
           onChange={(event) =>
             table.getColumn("email")?.setFilterValue(event.target.value)
           }
+          className="mb-2 md:mb-0"
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -253,6 +257,10 @@ export function DataTable({ data }: DataTableProps) {
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+
+        <div className="p-2">
+          <ExportExcelButton data={data} />
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>
