@@ -17,7 +17,7 @@ export function HeaderClientes() {
   const [openModal, setOpenModal] = useState(false);
   return (
     <div className="flex justify-between items-center ">
-      <h2 className="text-2xl">Listado de Clientes</h2>
+      <h2 className="text-2xl">Listado Clientes</h2>
 
       <Dialog open={openModal} onOpenChange={setOpenModal}>
         <DialogTrigger asChild>

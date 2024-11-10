@@ -24,11 +24,19 @@ import {
 } from "@/components/ui/table";
 // import { Button } from "@/components/ui/button";
 
-import { ArrowUpDown, MoreHorizontal, Pencil, Trash } from "lucide-react";
+import {
+  ArrowUpDown,
+  ChevronDown,
+  Logs,
+  MoreHorizontal,
+  Pencil,
+  Trash,
+} from "lucide-react";
 import { Cliente } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
@@ -45,39 +53,95 @@ export const columns: ColumnDef<Cliente>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Nombre Cliente <ArrowUpDown className="ml-2 h-4 w-4" />
+          Nombre <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
   {
     accessorKey: "ruc",
-    header: "RUC",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          RUC <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "telefono",
-    header: "Telefono",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Telefono <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "email",
-    header: "Email",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Correo <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "direccion",
-    header: "Direccion",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Direccion <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "tipo",
-    header: "Tipo Cliente",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Tipo <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
 
   {
     accessorKey: "userId",
-    header: "Usuario",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Usuario <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     id: "actions",
-    header: "Actions",
+    header: ({}) => {
+      return <Logs className="text-blue-600" />;
+    },
     cell: ({ row }) => {
       const id = row.original;
       console.log(id);
@@ -141,7 +205,7 @@ export function DataTable({ data }: DataTableProps) {
 
   return (
     <div className="p-4 bg-background shadow-md rounded-lg mt-4">
-      <div className="flex items-center mb-2">
+      <div className="flex items-center mb-2 gap-5">
         <Input
           placeholder="Filtrar por Nombre..."
           value={(table.getColumn("nombre")?.getFilterValue() as string) ?? ""}
@@ -149,6 +213,46 @@ export function DataTable({ data }: DataTableProps) {
             table.getColumn("nombre")?.setFilterValue(event.target.value)
           }
         />
+        <Input
+          placeholder="Filtrar por RUC..."
+          value={(table.getColumn("ruc")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("ruc")?.setFilterValue(event.target.value)
+          }
+        />
+        <Input
+          placeholder="Filtrar por Correo..."
+          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("email")?.setFilterValue(event.target.value)
+          }
+        />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="ml-auto">
+              Columnas <ChevronDown className="ml-2 h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                );
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -199,6 +303,31 @@ export function DataTable({ data }: DataTableProps) {
             )}
           </TableBody>
         </Table>
+      </div>
+
+      <div className="flex items-center justify-end space-x-2 py-4">
+        {/* <div className="flex-1 text-sm text-muted-foreground">
+          {table.getFilteredSelectedRowModel().rows.length} of{" "}
+          {table.getFilteredRowModel().rows.length} row(s) selected.
+        </div> */}
+        <div className="space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            Anterior
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            Siguiente
+          </Button>
+        </div>
       </div>
     </div>
   );
