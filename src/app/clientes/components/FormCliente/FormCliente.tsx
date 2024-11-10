@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-// import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -21,6 +21,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
+import { LoaderCircle } from "lucide-react";
 
 const formSchema = z.object({
   nombre: z.string().min(10),
@@ -29,18 +31,21 @@ const formSchema = z.object({
   email: z
     .string()
     .min(1, { message: "El campo es requerido." })
-    .email("N es un correo electrónico válido."),
+    .email("No es un correo electrónico válido."),
   direccion: z.string(),
-  tipo: z.string(),
+  tipo: z.string().min(1),
 });
 
-// interface FormProps {
-//   setOpenModal: Dispatch<SetStateAction<boolean>>;
-// }
+interface FormProps {
+  setOpenModal: Dispatch<SetStateAction<boolean>>;
+}
 
-export function FormCliente() {
+export function FormCliente(props: FormProps) {
+  const { setOpenModal } = props;
+  const router = useRouter();
   const { toast } = useToast();
-  //   const { setOpenModal } = props;
+
+  const [loading, setLoading] = useState(false); // Estado para el botón de carga
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -61,12 +66,36 @@ export function FormCliente() {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
-    toast({
-      title: "Exito!!! 😃",
-      description: "Los datos fueron guardados",
-      variant: "successful",
-    });
+
+    try {
+      setLoading(true); // Desactivar el botón
+
+      const resp = await fetch("/api/cliente", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      if (resp.ok) {
+        router.refresh();
+        setOpenModal(false);
+        toast({
+          title: "Exito!!! 😃",
+          description: "Los datos fueron guardados",
+          variant: "successful",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+
+      toast({
+        title: "Error al dar de alta el Cliente",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false); // Reactivar el botón
+    }
   };
 
   return (
@@ -110,7 +139,7 @@ export function FormCliente() {
                   <FormLabel>Teléfono</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="(+595) 981222333 ..."
+                      placeholder="(+595) 0981 222 333 ..."
                       type="text"
                       {...field}
                     />
@@ -175,8 +204,15 @@ export function FormCliente() {
               )}
             />
           </div>
-          <Button type="submit" disabled={!isValid}>
-            Guardar
+          <Button type="submit" disabled={!isValid || loading}>
+            {loading ? (
+              <>
+                <LoaderCircle className="mr-2 h-5 w-5 animate-spin" />
+                Guardando
+              </>
+            ) : (
+              "Guardar"
+            )}
           </Button>
         </form>
       </Form>

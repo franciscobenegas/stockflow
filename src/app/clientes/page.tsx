@@ -1,11 +1,12 @@
 import React from "react";
 import { HeaderClientes } from "./components/HeaderClientes";
+import { ListClientes } from "./components/ListClientes";
 
 export default function ClientesPage() {
   return (
     <div>
       <HeaderClientes />
-      <p>Listado Clientes</p>
+      <ListClientes />
     </div>
   );
 }

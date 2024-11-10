@@ -29,7 +29,7 @@ export function HeaderClientes() {
             <DialogDescription>Crear y editar cliente</DialogDescription>
           </DialogHeader>
 
-          <FormCliente />
+          <FormCliente setOpenModal={setOpenModal} />
         </DialogContent>
       </Dialog>
     </div>
