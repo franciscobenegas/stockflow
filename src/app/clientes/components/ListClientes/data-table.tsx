@@ -22,7 +22,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-// import { Button } from "@/components/ui/button";
 
 import {
   ArrowUpDown,
@@ -43,8 +42,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import ExportExcelButton from "./ExportExcelButton";
-
-// import Link from "next/link";
+import Link from "next/link";
 
 export const columns: ColumnDef<Cliente>[] = [
   {
@@ -145,9 +143,6 @@ export const columns: ColumnDef<Cliente>[] = [
       return <Logs className="text-blue-600" />;
     },
     cell: ({ row }) => {
-      const id = row.original;
-      console.log(id);
-
       return (
         <DropdownMenu>
           <DropdownMenuTrigger>
@@ -157,10 +152,13 @@ export const columns: ColumnDef<Cliente>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>
-              <Pencil className="w-4 h-4 mr-2" />
-              Editar
-            </DropdownMenuItem>
+            <Link href={`/clientes/${row.original.id}`}>
+              <DropdownMenuItem>
+                <Pencil className="w-4 h-4 mr-2" />
+                Editar
+              </DropdownMenuItem>
+            </Link>
+
             <DropdownMenuItem>
               <Trash className="w-4 h-4 mr-2 text-red-500 font-bold" />
               <p className="text-red-500">Eliminar</p>
