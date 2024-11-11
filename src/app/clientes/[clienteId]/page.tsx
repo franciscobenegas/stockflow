@@ -29,7 +29,6 @@ export default async function ClienteIdPage({
     <div>
       <Headers />
       <InfoCliente cliente={cliente} />
-      <p>fotter</p>
     </div>
   );
 }
