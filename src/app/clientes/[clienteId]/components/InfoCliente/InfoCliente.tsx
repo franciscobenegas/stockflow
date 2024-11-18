@@ -8,7 +8,6 @@ interface ClienteProps {
 
 export function InfoCliente(props: ClienteProps) {
   const { cliente } = props;
-  console.log(cliente);
 
   return (
     <div className="grid grid-cols-1 ">

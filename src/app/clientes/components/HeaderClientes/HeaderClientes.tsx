@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-// import { CirclePlus } from "lucide-react";
+
 import { FormCliente } from "../FormCliente";
 
 export function HeaderClientes() {
@@ -28,7 +28,6 @@ export function HeaderClientes() {
             <DialogTitle>Cliente</DialogTitle>
             <DialogDescription>Crear y editar cliente</DialogDescription>
           </DialogHeader>
-
           <FormCliente setOpenModal={setOpenModal} />
         </DialogContent>
       </Dialog>

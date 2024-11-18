@@ -41,144 +41,19 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+
 import ExportExcelButton from "./ExportExcelButton";
+
 import Link from "next/link";
-
-export const columns: ColumnDef<Cliente>[] = [
-  {
-    accessorKey: "nombre",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Nombre <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "ruc",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          RUC <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "telefono",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Telefono <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "email",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Correo <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "direccion",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Direccion <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "tipo",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Tipo <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-
-  {
-    accessorKey: "userId",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Usuario <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
-    id: "actions",
-    header: ({}) => {
-      return <Logs className="text-blue-600" />;
-    },
-    cell: ({ row }) => {
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Button variant="ghost" className="w-8 h-4 p-0">
-              <span className="sr-only">Open Menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <Link href={`/clientes/${row.original.id}`}>
-              <DropdownMenuItem>
-                <Pencil className="w-4 h-4 mr-2" />
-                Editar
-              </DropdownMenuItem>
-            </Link>
-
-            <DropdownMenuItem>
-              <Trash className="w-4 h-4 mr-2 text-red-500 font-bold" />
-              <p className="text-red-500">Eliminar</p>
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  `${row.original.nombre}\n ${row.original.direccion}\n ${row.original.telefono} \n ${row.original.email}`
-                )
-              }
-            >
-              <Clipboard className="w-4 h-4 mr-2" />
-              Copiar
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
-  },
-];
 
 interface DataTableProps {
   data: Cliente[];
@@ -190,6 +65,155 @@ export function DataTable({ data }: DataTableProps) {
     []
   );
   const [isMonted, setIsMonted] = useState(false);
+  const [deletingCliente, setDeletingCliente] = useState<Cliente | null>(null);
+  const handleDeleteConfirm = () => {
+    console.log(deletingCliente);
+
+    if (deletingCliente) {
+      //   onDelete(deletingCustomer.id);
+      console.log("Invocar Api para eliminar registro");
+      setDeletingCliente(null);
+    }
+  };
+
+  const columns: ColumnDef<Cliente>[] = [
+    {
+      accessorKey: "nombre",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Nombre <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+    },
+    {
+      accessorKey: "ruc",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            RUC <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+    },
+    {
+      accessorKey: "telefono",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Telefono <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+    },
+    {
+      accessorKey: "email",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Correo <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+    },
+    {
+      accessorKey: "direccion",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Direccion <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+    },
+    {
+      accessorKey: "tipo",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Tipo <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+    },
+
+    {
+      accessorKey: "userId",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Usuario <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+    },
+    {
+      id: "actions",
+      header: ({}) => {
+        return <Logs className="text-blue-600" />;
+      },
+      cell: ({ row }) => {
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Button variant="ghost" className="w-8 h-4 p-0">
+                <span className="sr-only">Open Menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <Link href={`/clientes/${row.original.id}`}>
+                <DropdownMenuItem>
+                  <Pencil className="w-4 h-4 mr-2" />
+                  Editar
+                </DropdownMenuItem>
+              </Link>
+
+              <DropdownMenuItem
+                onClick={() => setDeletingCliente(row.original)}
+              >
+                <Trash className="w-4 h-4 mr-2 text-red-500 font-bold" />
+                <p className="text-red-500">Eliminar</p>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem
+                onClick={() =>
+                  navigator.clipboard.writeText(
+                    `${row.original.nombre}\n ${row.original.direccion}\n ${row.original.telefono} \n ${row.original.email}`
+                  )
+                }
+              >
+                <Clipboard className="w-4 h-4 mr-2" />
+                Copiar
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        );
+      },
+    },
+  ];
 
   React.useEffect(() => {
     setIsMonted(true);
@@ -320,6 +344,37 @@ export function DataTable({ data }: DataTableProps) {
             )}
           </TableBody>
         </Table>
+
+        {/* Dialog para Eliminar */}
+        <Dialog
+          open={!!deletingCliente}
+          onOpenChange={() => setDeletingCliente(null)}
+        >
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Eliminar Cliente</DialogTitle>
+
+              <DialogDescription>
+                <p className="mt-3">
+                  ¿Estás seguro de que deseas eliminar el Cliente?
+                  <p className="font-bold italic">{deletingCliente?.nombre}</p>
+                  Esta acción no se puede deshacer.
+                </p>
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button
+                variant="outline"
+                onClick={() => setDeletingCliente(null)}
+              >
+                Cancelar
+              </Button>
+              <Button variant="destructive" onClick={handleDeleteConfirm}>
+                Eliminar
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div className="flex items-center justify-end space-x-2 py-4">

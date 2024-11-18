@@ -31,6 +31,7 @@ import { useState } from "react";
 
 interface ClienteFormProops {
   cliente: Cliente;
+  metodo?: string;
 }
 
 const formSchema = z.object({
@@ -46,7 +47,8 @@ const formSchema = z.object({
 });
 
 export function FormCliente(props: ClienteFormProops) {
-  const { cliente } = props;
+  const { cliente, metodo } = props;
+  console.log("Metodo = ", metodo);
   const router = useRouter();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false); // Estado para el botón de carga
