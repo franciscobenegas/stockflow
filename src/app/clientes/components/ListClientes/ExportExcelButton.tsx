@@ -4,7 +4,7 @@ import { useState } from "react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import { Cliente } from "@prisma/client";
-import { Sheet } from "lucide-react";
+import { Download } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -71,14 +71,17 @@ export default function ExportExcelButton({
           <Button
             onClick={exportToExcel}
             disabled={loading}
-            className="bg-blue-500 hover:bg-blue-700 text-white"
+            // className="bg-blue-500 hover:bg-blue-700 text-white"
+            variant="outline"
           >
             {/* {loading ? "Exportando..." : "Exportar a Excel"} */}
-            <Sheet />
+            {/* <Sheet /> */}
+            <Download className="mr-2 size-4" aria-hidden="true" />
+            XLS
           </Button>
         </TooltipTrigger>
         <TooltipContent>
-          <p>Exportar en Excel</p>
+          <p>Exportar a Excel</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-
+import { useRouter } from "next/navigation";
 import {
   ColumnDef,
   SortingState,
@@ -30,6 +30,7 @@ import {
   Logs,
   MoreHorizontal,
   Pencil,
+  Settings2,
   Trash,
 } from "lucide-react";
 import { Cliente } from "@prisma/client";
@@ -54,25 +55,51 @@ import {
 import ExportExcelButton from "./ExportExcelButton";
 
 import Link from "next/link";
+import { DialogClose } from "@radix-ui/react-dialog";
+import { useToast } from "@/hooks/use-toast";
 
 interface DataTableProps {
   data: Cliente[];
 }
 
 export function DataTable({ data }: DataTableProps) {
+  const router = useRouter();
+  const { toast } = useToast();
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
   const [isMonted, setIsMonted] = useState(false);
   const [deletingCliente, setDeletingCliente] = useState<Cliente | null>(null);
-  const handleDeleteConfirm = () => {
-    console.log(deletingCliente);
-
+  const [loading, setLoading] = useState(false); // Estado para el botón de carga
+  const handleDeleteConfirm = async () => {
     if (deletingCliente) {
-      //   onDelete(deletingCustomer.id);
-      console.log("Invocar Api para eliminar registro");
-      setDeletingCliente(null);
+      setLoading(true); // Desactivar el botón
+      try {
+        const resp = await fetch(`/api/cliente/${deletingCliente.id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (resp.ok) {
+          toast({
+            title: "Dato Eliminado!!! 😃",
+            variant: "destructive",
+          });
+          setDeletingCliente(null);
+          router.refresh();
+        }
+      } catch (error) {
+        toast({
+          title: "Algo salio mal, vuelva a intentarlo",
+          variant: "destructive",
+        });
+        console.log(error);
+      } finally {
+        setLoading(false); // Reactivar el botón
+      }
     }
   };
 
@@ -239,60 +266,68 @@ export function DataTable({ data }: DataTableProps) {
 
   return (
     <div className="p-4 bg-background shadow-md rounded-lg mt-4">
-      <div className="flex-row md:flex items-center mb-2 gap-5">
-        <Input
-          placeholder="Filtrar por Nombre..."
-          value={(table.getColumn("nombre")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("nombre")?.setFilterValue(event.target.value)
-          }
-          className="mb-2 md:mb-0"
-        />
-        <Input
-          placeholder="Filtrar por RUC..."
-          value={(table.getColumn("ruc")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("ruc")?.setFilterValue(event.target.value)
-          }
-          className="mb-2 md:mb-0"
-        />
-        <Input
-          placeholder="Filtrar por Correo..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
-          }
-          className="mb-2 md:mb-0"
-        />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columnas <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+      <div className="w-full items-center justify-between">
+        <div className="flex-row md:flex items-center mb-2 gap-5">
+          <Input
+            placeholder="Filtrar por Nombre..."
+            value={
+              (table.getColumn("nombre")?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn("nombre")?.setFilterValue(event.target.value)
+            }
+            className="mb-2 md:mb-0"
+          />
+          <Input
+            placeholder="Filtrar por RUC..."
+            value={(table.getColumn("ruc")?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn("ruc")?.setFilterValue(event.target.value)
+            }
+            className="mb-2 md:mb-0"
+          />
+          <Input
+            placeholder="Filtrar por Correo..."
+            value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn("email")?.setFilterValue(event.target.value)
+            }
+            className="mb-2 md:mb-0"
+          />
 
-        <div className="p-2">
-          <ExportExcelButton data={data} />
+          <div className="flex-row md:flex items-center">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="ml-auto">
+                  <Settings2 className="mr-2 size-4" />
+                  Columnas <ChevronDown className="ml-2 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {table
+                  .getAllColumns()
+                  .filter((column) => column.getCanHide())
+                  .map((column) => {
+                    return (
+                      <DropdownMenuCheckboxItem
+                        key={column.id}
+                        className="capitalize"
+                        checked={column.getIsVisible()}
+                        onCheckedChange={(value) =>
+                          column.toggleVisibility(!!value)
+                        }
+                      >
+                        {column.id}
+                      </DropdownMenuCheckboxItem>
+                    );
+                  })}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <div className="p-2">
+              <ExportExcelButton data={data} />
+            </div>
+          </div>
         </div>
       </div>
       <div className="rounded-md border">
@@ -352,24 +387,32 @@ export function DataTable({ data }: DataTableProps) {
         >
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Eliminar Cliente</DialogTitle>
+              <DialogTitle>Eliminar Cliente 🗑️</DialogTitle>
 
               <DialogDescription>
-                <p className="mt-3">
-                  ¿Estás seguro de que deseas eliminar el Cliente?
-                  <p className="font-bold italic">{deletingCliente?.nombre}</p>
-                  Esta acción no se puede deshacer.
+                <p className="mt-2">
+                  ¿Estás seguro de que deseas eliminar el registro de
+                  <span className="font-bold italic">
+                    {" " + deletingCliente?.nombre + " "}
+                  </span>
+                  ? Esta acción no se puede deshacer.
                 </p>
               </DialogDescription>
             </DialogHeader>
-            <DialogFooter>
+            <DialogFooter className="gap-2 sm:space-x-0">
+              <DialogClose>
+                <Button
+                  variant="outline"
+                  onClick={() => setDeletingCliente(null)}
+                >
+                  Cancelar
+                </Button>
+              </DialogClose>
               <Button
-                variant="outline"
-                onClick={() => setDeletingCliente(null)}
+                variant="destructive"
+                onClick={handleDeleteConfirm}
+                disabled={loading}
               >
-                Cancelar
-              </Button>
-              <Button variant="destructive" onClick={handleDeleteConfirm}>
                 Eliminar
               </Button>
             </DialogFooter>
