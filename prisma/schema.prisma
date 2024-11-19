@@ -40,6 +40,50 @@ model Cliente{
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId String
-
+  
   @@index([nombre,ruc])
 }
+
+model Producto {
+  id            Int        @id @default(autoincrement())
+  nombre        String
+  codigoBarra   String?
+  codigoSKU     String?
+  descripcion   String?
+  precioCompra  Float?
+  preioVenta    Float?
+  imagen        String?
+  cantidad      Int
+  cantidadMinima Int
+  cantidadMaxima Int
+  categoria     Categoria? @relation(fields: [categoriaId], references: [id])
+  categoriaId   Int?
+  proveedor     Proveedor? @relation(fields: [proveedorId], references: [id])
+  proveedorId   Int?
+  usuarioId     String
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@index([categoriaId])
+  @@index([proveedorId])
+  @@index([usuarioId])
+}
+
+model Categoria {
+  id          Int         @id @default(autoincrement())
+  nombre      String
+  productos   Producto[]
+  usuarioId   String
+  createdAt   DateTime    @default(now())
+}
+
+
+model Proveedor {
+  id          Int         @id @default(autoincrement())
+  nombre      String
+  contacto    String?
+  productos   Producto[]
+  usuarioId   String
+  createdAt   DateTime    @default(now())
+}
+

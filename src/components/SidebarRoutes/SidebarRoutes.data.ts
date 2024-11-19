@@ -3,9 +3,9 @@ import {
   PanelsTopLeft,
   Settings,
   ShieldCheck,
-  CircleHelpIcon,
   Calendar,
   ContactIcon,
+  LayoutDashboard,
 } from "lucide-react";
 
 export const dataGeneralSidebar = [
@@ -28,9 +28,9 @@ export const dataGeneralSidebar = [
 
 export const dataToolsSidear = [
   {
-    icon: CircleHelpIcon,
-    label: "Consultas",
-    href: "/consultas",
+    icon: LayoutDashboard,
+    label: "Categorias",
+    href: "/categorias",
   },
   {
     icon: BarChart4,

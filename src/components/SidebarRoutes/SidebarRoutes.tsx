@@ -22,7 +22,7 @@ export function SidebarRoutes() {
         </div>
         <Separator />
         <div className="p-2 md:p-6">
-          <p className="text-slate-950 mb-2 font-bold">HERRAMIENTAS</p>
+          <p className="text-slate-950 mb-2 font-bold">CONFIGURACIONES</p>
           {dataToolsSidear.map((item) => (
             <SidebarItem key={item.label} item={item} />
           ))}
