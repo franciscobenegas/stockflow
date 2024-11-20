@@ -56,6 +56,7 @@ import ExportExcelButton from "./ExportExcelButton";
 
 import Link from "next/link";
 import { DialogClose } from "@radix-ui/react-dialog";
+import { formatDate } from "@/lib/utils";
 // import { useToast } from "@/hooks/use-toast";
 
 interface DataTableProps {
@@ -148,6 +149,7 @@ export function DataTable({ data }: DataTableProps) {
           </Button>
         );
       },
+      cell: ({ cell }) => formatDate(cell.getValue() as Date),
     },
 
     {
