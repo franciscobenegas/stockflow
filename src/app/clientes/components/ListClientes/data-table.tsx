@@ -308,18 +308,20 @@ export function DataTable({ data }: DataTableProps) {
                   .getAllColumns()
                   .filter((column) => column.getCanHide())
                   .map((column) => {
-                    return (
-                      <DropdownMenuCheckboxItem
-                        key={column.id}
-                        className="capitalize"
-                        checked={column.getIsVisible()}
-                        onCheckedChange={(value) =>
-                          column.toggleVisibility(!!value)
-                        }
-                      >
-                        {column.id}
-                      </DropdownMenuCheckboxItem>
-                    );
+                    if (column.id !== "actions") {
+                      return (
+                        <DropdownMenuCheckboxItem
+                          key={column.id}
+                          className="capitalize"
+                          checked={column.getIsVisible()}
+                          onCheckedChange={(value) =>
+                            column.toggleVisibility(!!value)
+                          }
+                        >
+                          {column.id === "userId" ? "Usuario" : column.id}
+                        </DropdownMenuCheckboxItem>
+                      );
+                    }
                   })}
               </DropdownMenuContent>
             </DropdownMenu>
