@@ -47,8 +47,7 @@ const formSchema = z.object({
 });
 
 export function FormCliente(props: ClienteFormProops) {
-  const { cliente, metodo } = props;
-  console.log("Metodo = ", metodo);
+  const { cliente } = props;
   const router = useRouter();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false); // Estado para el botón de carga

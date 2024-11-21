@@ -42,8 +42,8 @@ const DashboardPage = async () => {
 
   return (
     <div>
-      <h1>DashBoard</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3  lg:gap-x-20">
+      <h1 className="text-primary">Menu DashBoard</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-x-20">
         {dataCardSummary.map(({ icon, total, average, title, tooltipText }) => (
           <CardSummary
             key={title}

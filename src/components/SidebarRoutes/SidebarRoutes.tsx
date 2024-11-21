@@ -15,14 +15,14 @@ export function SidebarRoutes() {
     <div className="flex flex-col justify-between h-full">
       <div>
         <div className="p-2 md:p-6">
-          <p className="text-slate-950 mb-2 font-bold">GENERAL</p>
+          <p className=" text-primary mb-2 font-bold">GENERAL</p>
           {dataGeneralSidebar.map((item) => (
             <SidebarItem key={item.label} item={item} />
           ))}
         </div>
         <Separator />
         <div className="p-2 md:p-6">
-          <p className="text-slate-950 mb-2 font-bold">CONFIGURACIONES</p>
+          <p className=" mb-2 font-bold text-primary">CONFIGURACIONES</p>
           {dataToolsSidear.map((item) => (
             <SidebarItem key={item.label} item={item} />
           ))}
@@ -30,7 +30,7 @@ export function SidebarRoutes() {
         <Separator />
 
         <div className="p-2 md:p-6">
-          <p className="text-slate-950 mb-2 font-bold">SOPORTES</p>
+          <p className=" text-primary mb-2 font-bold">SOPORTES</p>
           {dataSupportSidear.map((item) => (
             <SidebarItem key={item.label} item={item} />
           ))}

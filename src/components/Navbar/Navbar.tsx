@@ -20,6 +20,7 @@ import { signIn, signOut } from "next-auth/react";
 import { LoadingPage } from "../../app/components/LoadingPage";
 import { SidebarRoutes } from "../SidebarRoutes";
 import { ToggleTheme } from "../ToggleTheme";
+import { ThemeColorToggle } from "@/app/components/theme-color-toggle";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
@@ -48,8 +49,11 @@ export default function Navbar() {
           <Search strokeWidth={1} className="absolute top-2 right-2" />
         </div>
         <div className="flex gap-x-2 items-center">
-          <div className="mr-2">
-            <ToggleTheme />
+          <div className="flex mr-2">
+            <div className="flex gap-2 items-center justify-center">
+              <ThemeColorToggle />
+              <ToggleTheme />
+            </div>
           </div>
           <div>
             <DropdownMenu>

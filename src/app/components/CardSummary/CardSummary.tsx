@@ -28,7 +28,7 @@ export function CardSummary(props: CardSummaryProps) {
         <CustomTooltip content={tooltipText} />
       </div>
       <div className="flex gap-4 mt-2 md:mt-4">
-        <p className="text-2xl"> {total}</p>
+        <p className="text-2xl text-primary"> {total}</p>
         <div
           className={cn(
             `flex items-center gap-1 px-2  text-xs text-white rounded-lg h-[20px] bg-black dark:bg-secondary`

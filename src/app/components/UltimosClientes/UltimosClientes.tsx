@@ -11,7 +11,7 @@ export function UltimosClientes() {
           <CustomIcon icon={Building} />
         </div>
 
-        <p className="text-xl">Clientes </p>
+        <p className="text-xl text-primary">Clientes </p>
       </div>
       <div className="">
         <TablaClientes />
