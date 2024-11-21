@@ -51,7 +51,9 @@ export default function Navbar() {
         <div className="flex gap-x-2 items-center">
           <div className="flex mr-2">
             <div className="flex gap-2 items-center justify-center">
-              <ThemeColorToggle />
+              <div className="hidden md:block">
+                <ThemeColorToggle />
+              </div>
               <ToggleTheme />
             </div>
           </div>
@@ -95,6 +97,11 @@ export default function Navbar() {
                   </div>
                   <DropdownMenuItem>Configuraciones</DropdownMenuItem>
                   <DropdownMenuItem>Ayuda</DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <div className="md:hidden block">
+                      <ThemeColorToggle />
+                    </div>
+                  </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
