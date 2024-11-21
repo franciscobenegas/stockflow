@@ -57,6 +57,8 @@ import ExportExcelButton from "./ExportExcelButton";
 import Link from "next/link";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useToast } from "@/hooks/use-toast";
+import { formatDate } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 
 interface DataTableProps {
   data: Cliente[];
@@ -69,6 +71,26 @@ export function DataTable({ data }: DataTableProps) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+
+  const tipoCliente = [
+    {
+      id: "particular",
+      nombre: "Particular",
+    },
+    {
+      id: "comercio",
+      nombre: "Comercio",
+    },
+    {
+      id: "taller",
+      nombre: "Taller",
+    },
+    {
+      id: "NA",
+      nombre: "Otro",
+    },
+  ];
+
   const [isMonted, setIsMonted] = useState(false);
   const [deletingCliente, setDeletingCliente] = useState<Cliente | null>(null);
   const [loading, setLoading] = useState(false); // Estado para el botón de carga
@@ -181,6 +203,20 @@ export function DataTable({ data }: DataTableProps) {
           </Button>
         );
       },
+      cell: ({ cell }) => {
+        const tpoCli = tipoCliente.find(
+          (tpoCli) => tpoCli.id === cell.getValue()
+        );
+
+        if (!tpoCli) return null;
+
+        return (
+          <div>
+            {/* <span className="font-bold">{tpoCli.nombre}</span> */}
+            <Badge>{tpoCli.nombre}</Badge>
+          </div>
+        );
+      },
     },
 
     {
@@ -196,6 +232,22 @@ export function DataTable({ data }: DataTableProps) {
         );
       },
     },
+
+    {
+      accessorKey: "updatedAt",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Fecha Act. <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ cell }) => formatDate(cell.getValue() as Date),
+    },
+
     {
       id: "actions",
       header: ({}) => {

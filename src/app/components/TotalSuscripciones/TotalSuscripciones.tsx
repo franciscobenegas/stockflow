@@ -28,7 +28,9 @@ export function TotalSuscripciones() {
   return (
     <div className="mb-4 lg:mb-0 shadow-sm bg-background rounded-lg p-5 w-full xl:w-96 hover:shadow-lg transition">
       <div className="flex gap-x-2 items-center mb-4">
-        <CustomIcon icon={Percent} />
+        <div className="shadow font-bold">
+          <CustomIcon icon={Percent} />
+        </div>
         <p className="text-xl">Total Suscriptos</p>
       </div>
       <div className="w-full h-[200px] p-5">
