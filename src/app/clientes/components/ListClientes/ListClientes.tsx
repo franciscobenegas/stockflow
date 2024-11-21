@@ -12,11 +12,11 @@ export async function ListClientes() {
     return redirect("/");
   }
 
-  // const clientes = await prisma.cliente.findMany({
-  //   orderBy: {
-  //     createdAt: "desc",
-  //   },
-  // });
+  const clientes = await prisma.cliente.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
-  return <div>hola</div>; //<DataTable data={clientes} />;
+  return <DataTable data={clientes} />;
 }
