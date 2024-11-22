@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import ThemeDataProvider from "../context/theme-data-provider";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 const noto = Noto_Sans_Display({ subsets: ["latin"] });
 
@@ -31,29 +32,31 @@ export default async function RootLayout({
         <ThemeProvider attribute="class" enableSystem disableTransitionOnChange>
           <SessionProvider>
             <ThemeDataProvider>
-              <div className="flex w-full h-full">
-                {/* hidden xl:block w-80 h-full xl:fixed bg-red-500 */}
-                <div
-                  className={cn(
-                    "h-full  hidden",
-                    session?.user?.name && "xl:block w-80 xl:fixed"
-                  )}
-                >
-                  <Sidebar />
-                </div>
+              <SidebarProvider>
+                <div className="flex w-full h-full">
+                  {/* hidden xl:block w-80 h-full xl:fixed bg-red-500 */}
+                  <div
+                    className={cn(
+                      "h-full  hidden",
+                      session?.user?.name && "xl:block w-72 xl:fixed"
+                    )}
+                  >
+                    <Sidebar />
+                  </div>
 
-                {/* w-full xl:ml-80 bg-orange-300 */}
+                  {/* w-full xl:ml-80 bg-orange-300 */}
 
-                <div
-                  className={cn("w-full", session?.user?.name && "xl:ml-80")}
-                >
-                  <Navbar />
-                  <div className="p-6 bg-[#fafbfc] dark:bg-secondary">
-                    {children}
-                    <Toaster />
+                  <div
+                    className={cn("w-full", session?.user?.name && "xl:ml-72")}
+                  >
+                    <Navbar />
+                    <div className="p-6 bg-[#fafbfc] dark:bg-secondary">
+                      {children}
+                      <Toaster />
+                    </div>
                   </div>
                 </div>
-              </div>
+              </SidebarProvider>
             </ThemeDataProvider>
           </SessionProvider>
         </ThemeProvider>

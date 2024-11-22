@@ -322,7 +322,9 @@ export function DataTable({ data }: DataTableProps) {
         >
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Eliminar Cliente 🗑️</DialogTitle>
+              <DialogTitle className="text-primary">
+                Eliminar Cliente 🗑️
+              </DialogTitle>
 
               <DialogDescription>
                 <p className="mt-2">

@@ -25,7 +25,7 @@ export function HeaderClientes() {
         </DialogTrigger>
         <DialogContent className="sm:max-w-[625px]">
           <DialogHeader>
-            <DialogTitle>Cliente</DialogTitle>
+            <DialogTitle className="text-primary">Cliente</DialogTitle>
             <DialogDescription>Dar de alta un cliente</DialogDescription>
           </DialogHeader>
           <FormCliente setOpenModal={setOpenModal} />

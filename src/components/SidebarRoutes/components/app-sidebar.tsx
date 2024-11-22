@@ -1,11 +1,5 @@
 "use client";
-import React from "react";
-import { dataSupportSidear, dataToolsSidear } from "./SidebarRoutes.data";
-import { SidebarItem } from "../SidebarItem";
-import { Separator } from "../ui/separator";
-import { Button } from "../ui/button";
-import { CreditCard } from "lucide-react";
-import { NavMain } from "./components/nav-main";
+import * as React from "react";
 import {
   AudioWaveform,
   BookOpen,
@@ -18,7 +12,18 @@ import {
   Settings2,
   SquareTerminal,
 } from "lucide-react";
-
+import { NavMain } from "./nav-main";
+import { NavProjects } from "./nav-projects";
+import { NavUser } from "./nav-user";
+import { TeamSwitcher } from "./team-switcher";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarRail,
+} from "@/components/ui/sidebar";
+// This is sample data.
 const data = {
   user: {
     name: "shadcn",
@@ -44,21 +49,21 @@ const data = {
   ],
   navMain: [
     {
-      title: "CLIENTE",
+      title: "Playground",
       url: "#",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "Clientes",
-          url: "/clientes",
-        },
-        {
-          title: "Tipos",
+          title: "History",
           url: "#",
         },
         {
-          title: "Cuentas",
+          title: "Starred",
+          url: "#",
+        },
+        {
+          title: "Settings",
           url: "#",
         },
       ],
@@ -147,44 +152,20 @@ const data = {
     },
   ],
 };
-
-export function SidebarRoutes() {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <div className="flex flex-col justify-between h-full overflow-scroll">
-      <div>
-        <div className="p-2 md:p-6">
-          <p className=" text-primary mb-2 font-bold">GENERAL</p>
-          <NavMain items={data.navMain} />
-        </div>
-        <Separator />
-        <div className="p-2 md:p-6">
-          <p className=" mb-2 font-bold text-primary">CONFIGURACIONES</p>
-          {dataToolsSidear.map((item) => (
-            <SidebarItem key={item.label} item={item} />
-          ))}
-        </div>
-        <Separator />
-
-        <div className="p-2 md:p-6">
-          <p className=" text-primary mb-2 font-bold">SOPORTES</p>
-          {dataSupportSidear.map((item) => (
-            <SidebarItem key={item.label} item={item} />
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <div className="text-center p-6 ">
-          <Button variant="outline" className="w-full hover:text-blue-500">
-            Actualizar Plan
-            <CreditCard className="h-5 w-5 ml-10" />
-          </Button>
-        </div>
-        <Separator />
-        <footer className="mt-3 p-3 text-center">
-          @{new Date().getFullYear()}. Todos los derechos reservados
-        </footer>
-      </div>
-    </div>
+    <Sidebar collapsible="icon" {...props}>
+      <SidebarHeader>
+        <TeamSwitcher teams={data.teams} />
+      </SidebarHeader>
+      <SidebarContent>
+        <NavMain items={data.navMain} />
+        <NavProjects projects={data.projects} />
+      </SidebarContent>
+      <SidebarFooter>
+        <NavUser user={data.user} />
+      </SidebarFooter>
+      <SidebarRail />
+    </Sidebar>
   );
 }

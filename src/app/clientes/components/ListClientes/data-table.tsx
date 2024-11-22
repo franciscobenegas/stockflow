@@ -251,7 +251,7 @@ export function DataTable({ data }: DataTableProps) {
     {
       id: "actions",
       header: ({}) => {
-        return <Logs className="text-blue-600" />;
+        return <Logs className="text-primary" />;
       },
       cell: ({ row }) => {
         return (
@@ -441,7 +441,9 @@ export function DataTable({ data }: DataTableProps) {
         >
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Eliminar Cliente 🗑️</DialogTitle>
+              <DialogTitle className="text-primary">
+                Eliminar Cliente 🗑️
+              </DialogTitle>
 
               <DialogDescription>
                 <p className="mt-2">
