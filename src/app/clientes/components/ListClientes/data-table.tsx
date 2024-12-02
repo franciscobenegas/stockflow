@@ -58,7 +58,7 @@ import Link from "next/link";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useToast } from "@/hooks/use-toast";
 import { formatDate } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge";
 
 interface DataTableProps {
   data: Cliente[];
@@ -72,24 +72,24 @@ export function DataTable({ data }: DataTableProps) {
     []
   );
 
-  const tipoCliente = [
-    {
-      id: "particular",
-      nombre: "Particular",
-    },
-    {
-      id: "comercio",
-      nombre: "Comercio",
-    },
-    {
-      id: "taller",
-      nombre: "Taller",
-    },
-    {
-      id: "NA",
-      nombre: "Otro",
-    },
-  ];
+  // const tipoCliente = [
+  //   {
+  //     id: "particular",
+  //     nombre: "Particular",
+  //   },
+  //   {
+  //     id: "comercio",
+  //     nombre: "Comercio",
+  //   },
+  //   {
+  //     id: "taller",
+  //     nombre: "Taller",
+  //   },
+  //   {
+  //     id: "NA",
+  //     nombre: "Otro",
+  //   },
+  // ];
 
   const [isMonted, setIsMonted] = useState(false);
   const [deletingCliente, setDeletingCliente] = useState<Cliente | null>(null);
@@ -203,20 +203,20 @@ export function DataTable({ data }: DataTableProps) {
           </Button>
         );
       },
-      cell: ({ cell }) => {
-        const tpoCli = tipoCliente.find(
-          (tpoCli) => tpoCli.id === cell.getValue()
-        );
+      // cell: ({ cell }) => {
+      //   const tpoCli = tipoCliente.find(
+      //     (tpoCli) => tpoCli.id === cell.getValue()
+      //   );
 
-        if (!tpoCli) return null;
+      //   if (!tpoCli) return null;
 
-        return (
-          <div>
-            {/* <span className="font-bold">{tpoCli.nombre}</span> */}
-            <Badge>{tpoCli.nombre}</Badge>
-          </div>
-        );
-      },
+      //   return (
+      //     <div>
+      //       {/* <span className="font-bold">{tpoCli.nombre}</span> */}
+      //       <Badge>{tpoCli.nombre}</Badge>
+      //     </div>
+      //   );
+      // },
     },
 
     {

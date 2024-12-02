@@ -59,7 +59,7 @@ export function FormCliente(props: ClienteFormProops) {
       telefono: cliente.telefono,
       email: cliente.email,
       direccion: cliente.direccion,
-      tipo: cliente.tipo,
+      // tipo: cliente.tipo,
     },
   });
 

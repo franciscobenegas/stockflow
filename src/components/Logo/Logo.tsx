@@ -18,7 +18,7 @@ export function Logo() {
         height={40}
         className="rounded-lg"
       />
-      <h1 className="font-bold text-xl">StockFlow v1.0</h1>
+      <h1 className="font-bold text-xl">StockFlow</h1>
     </div>
   );
 }

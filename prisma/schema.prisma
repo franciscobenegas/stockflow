@@ -30,18 +30,20 @@ model User{
 }
 
 model Cliente{
-  id String @id @default(uuid())
-  nombre String 
-  ruc String 
-  telefono String
-  email String
-  direccion String
-  tipo String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId String
-  
+  id            String @id @default(uuid())
+  nombre        String 
+  ruc           String 
+  telefono      String
+  email         String
+  direccion     String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  userId        String
+  tipoCliente   tipoCliente   @relation(fields: [tipoClienteId], references: [id])
+  tipoClienteId Int          // Llave foránea al tipo de cliente
+
   @@index([nombre,ruc])
+  @@index([tipoClienteId])
 }
 
 model Producto {
@@ -60,6 +62,8 @@ model Producto {
   categoriaId   Int?
   proveedor     Proveedor? @relation(fields: [proveedorId], references: [id])
   proveedorId   Int?
+  marca         Marca      @relation(fields: [marcaId], references: [id])
+  marcaId       Int
   usuarioId     String
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
@@ -67,6 +71,7 @@ model Producto {
   @@index([categoriaId])
   @@index([proveedorId])
   @@index([usuarioId])
+  @@index([marcaId])
 }
 
 model Categoria {
@@ -75,6 +80,7 @@ model Categoria {
   productos   Producto[]
   usuarioId   String
   createdAt   DateTime    @default(now())
+  updatedAt   DateTime?   @updatedAt
 }
 
 
@@ -85,5 +91,24 @@ model Proveedor {
   productos   Producto[]
   usuarioId   String
   createdAt   DateTime    @default(now())
+  updatedAt   DateTime   @updatedAt
 }
+
+model Marca {
+  id          Int @id @default(autoincrement())
+  nombre      String @unique
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  usuarioId   String
+  producto    Producto[] // Relación uno a muchos con productos
+}
+
+model tipoCliente {
+  id          Int         @id @default(autoincrement()) // Identificador único
+  name        String     // Nombre del tipo de cliente (por ejemplo, "Premium", "Básico")
+  updatedAt   DateTime   @updatedAt
+  usuarioId   String
+  cliente     Cliente[]  // Relación uno a muchos con clientes
+}
+
 

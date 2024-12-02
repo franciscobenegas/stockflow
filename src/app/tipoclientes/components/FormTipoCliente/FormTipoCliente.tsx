@@ -18,14 +18,14 @@ import { useRouter } from "next/navigation";
 import { LoaderCircle } from "lucide-react";
 
 const formSchema = z.object({
-  nombre: z.string().min(2),
+  name: z.string().min(2),
 });
 
 interface FormProps {
   setOpenModal: Dispatch<SetStateAction<boolean>>;
 }
 
-export function FromCategorias(props: FormProps) {
+export function FormTipoCliente(props: FormProps) {
   const { setOpenModal } = props;
   const router = useRouter();
   const { toast } = useToast();
@@ -36,12 +36,13 @@ export function FromCategorias(props: FormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      nombre: "",
+      name: "",
     },
   });
 
   const { isValid } = form.formState;
 
+  // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -49,13 +50,14 @@ export function FromCategorias(props: FormProps) {
     try {
       setLoading(true); // Desactivar el botón
 
-      const resp = await fetch("/api/categoria", {
+      const resp = await fetch("/api/tipocliente", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
       });
+
       if (resp.ok) {
         router.refresh();
         setOpenModal(false);
@@ -84,16 +86,12 @@ export function FromCategorias(props: FormProps) {
           <div className="grid grid-cols-2 gap-3">
             <FormField
               control={form.control}
-              name="nombre"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nombre</FormLabel>
+                  <FormLabel>Tipo Cliente</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Nombre de la categoria"
-                      type="text"
-                      {...field}
-                    />
+                    <Input placeholder="Nombre ..." type="text" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
