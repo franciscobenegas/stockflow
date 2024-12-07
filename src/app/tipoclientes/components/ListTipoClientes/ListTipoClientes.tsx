@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/authOptions";
 import prisma from "@/libs/prisma";
+import { DataTableTipoCliente } from "./data-table";
 // import { DataTable } from "./data-table";
 
 export async function ListTipoClientes() {
@@ -20,5 +21,5 @@ export async function ListTipoClientes() {
 
   console.log(tipoClientes);
 
-  return <div>ListTipoClientes</div>;
+  return <DataTableTipoCliente data={tipoClientes} />;
 }
