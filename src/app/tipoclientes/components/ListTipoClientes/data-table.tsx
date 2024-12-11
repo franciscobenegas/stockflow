@@ -169,7 +169,7 @@ export function DataTableTipoCliente({ data }: DataTableProps) {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <Link href={`/clientes/${row.original.id}`}>
+              <Link href={`/tipoclientes/${row.original.id}`}>
                 <DropdownMenuItem>
                   <Pencil className="w-4 h-4 mr-2" />
                   Editar

@@ -19,7 +19,5 @@ export async function ListTipoClientes() {
     },
   });
 
-  console.log(tipoClientes);
-
   return <DataTableTipoCliente data={tipoClientes} />;
 }
