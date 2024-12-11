@@ -33,7 +33,7 @@ import {
   Settings2,
   Trash,
 } from "lucide-react";
-import { Cliente } from "@prisma/client";
+import { Cliente, tipoCliente } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -58,13 +58,15 @@ import Link from "next/link";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useToast } from "@/hooks/use-toast";
 import { formatDate } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 // import { Badge } from "@/components/ui/badge";
 
 interface DataTableProps {
   data: Cliente[];
+  tipoCliente: tipoCliente[];
 }
 
-export function DataTable({ data }: DataTableProps) {
+export function DataTable({ data, tipoCliente }: DataTableProps) {
   const router = useRouter();
   const { toast } = useToast();
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -203,20 +205,20 @@ export function DataTable({ data }: DataTableProps) {
           </Button>
         );
       },
-      // cell: ({ cell }) => {
-      //   const tpoCli = tipoCliente.find(
-      //     (tpoCli) => tpoCli.id === cell.getValue()
-      //   );
+      cell: ({ cell }) => {
+        const tpoCli = tipoCliente.find(
+          (tpoCli) => tpoCli.id === cell.getValue()
+        );
 
-      //   if (!tpoCli) return null;
+        if (!tpoCli) return null;
 
-      //   return (
-      //     <div>
-      //       {/* <span className="font-bold">{tpoCli.nombre}</span> */}
-      //       <Badge>{tpoCli.nombre}</Badge>
-      //     </div>
-      //   );
-      // },
+        return (
+          <div>
+            {/* <span className="font-bold">{tpoCli.nombre}</span> */}
+            <Badge>{tpoCli.name}</Badge>
+          </div>
+        );
+      },
     },
 
     {

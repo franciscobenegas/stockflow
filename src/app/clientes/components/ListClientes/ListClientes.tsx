@@ -18,5 +18,9 @@ export async function ListClientes() {
     },
   });
 
-  return <DataTable data={clientes} />;
+  const tipoClientes = await prisma.tipoCliente.findMany({
+    orderBy: { usuarioId: "asc" },
+  });
+
+  return <DataTable data={clientes} tipoCliente={tipoClientes} />;
 }
