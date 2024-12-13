@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Cliente } from "@prisma/client";
+import { Cliente, tipoCliente } from "@prisma/client";
 
 import {
   Form,
@@ -31,7 +31,7 @@ import { useState } from "react";
 
 interface ClienteFormProops {
   cliente: Cliente;
-  metodo?: string;
+  tipoClientes: tipoCliente[];
 }
 
 const formSchema = z.object({
@@ -43,11 +43,11 @@ const formSchema = z.object({
     .min(1, { message: "El campo es requerido." })
     .email("No es un correo electrónico válido."),
   direccion: z.string(),
-  tipo: z.string().min(1),
+  tipoClienteIdChar: z.string().min(1),
 });
 
 export function FormCliente(props: ClienteFormProops) {
-  const { cliente } = props;
+  const { cliente, tipoClientes } = props;
   const router = useRouter();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false); // Estado para el botón de carga
@@ -59,11 +59,20 @@ export function FormCliente(props: ClienteFormProops) {
       telefono: cliente.telefono,
       email: cliente.email,
       direccion: cliente.direccion,
-      // tipo: cliente.tipo,
+      tipoClienteIdChar: cliente.tipoClienteId.toString(),
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const clienteAdd = {
+      nombre: values.nombre,
+      ruc: values.ruc,
+      telefono: values.telefono,
+      email: values.email,
+      direccion: values.direccion,
+      tipoClienteId: Number(values.tipoClienteIdChar),
+    };
+
     try {
       setLoading(true); // Desactivar el botón
       const resp = await fetch(`/api/cliente/${cliente.id}`, {
@@ -71,7 +80,7 @@ export function FormCliente(props: ClienteFormProops) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(clienteAdd),
       });
 
       if (resp.ok) {
@@ -175,10 +184,10 @@ export function FormCliente(props: ClienteFormProops) {
 
           <FormField
             control={form.control}
-            name="tipo"
+            name="tipoClienteIdChar"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Tipo</FormLabel>
+                <FormLabel>Tipo Cliente</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -189,10 +198,11 @@ export function FormCliente(props: ClienteFormProops) {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="taller">Taller</SelectItem>
-                    <SelectItem value="particular">Particular</SelectItem>
-                    <SelectItem value="comercio">Comercio</SelectItem>
-                    <SelectItem value="NA">Otro</SelectItem>
+                    {tipoClientes.map((item) => (
+                      <SelectItem key={item.id} value={item.id.toString()}>
+                        {item.name}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 <FormMessage />

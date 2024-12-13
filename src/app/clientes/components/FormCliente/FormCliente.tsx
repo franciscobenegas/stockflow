@@ -33,18 +33,20 @@ const formSchema = z.object({
     .min(1, { message: "El campo es requerido." })
     .email("No es un correo electrónico válido."),
   direccion: z.string(),
-  tipo: z.string().min(1),
+  tipoClienteIdChar: z.string().min(1),
 });
+
+import { tipoCliente } from "@prisma/client";
 
 interface FormProps {
   setOpenModal: Dispatch<SetStateAction<boolean>>;
+  tipoClientes: tipoCliente[];
 }
 
 export function FormCliente(props: FormProps) {
-  const { setOpenModal } = props;
+  const { setOpenModal, tipoClientes } = props;
   const router = useRouter();
   const { toast } = useToast();
-
   const [loading, setLoading] = useState(false); // Estado para el botón de carga
 
   // 1. Define your form.
@@ -56,7 +58,7 @@ export function FormCliente(props: FormProps) {
       telefono: "",
       email: "",
       direccion: "",
-      tipo: "",
+      tipoClienteIdChar: "",
     },
   });
 
@@ -67,6 +69,15 @@ export function FormCliente(props: FormProps) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
 
+    const clienteAdd = {
+      nombre: values.nombre,
+      ruc: values.ruc,
+      telefono: values.telefono,
+      email: values.email,
+      direccion: values.direccion,
+      tipoClienteId: Number(values.tipoClienteIdChar),
+    };
+
     try {
       setLoading(true); // Desactivar el botón
 
@@ -75,7 +86,7 @@ export function FormCliente(props: FormProps) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(clienteAdd),
       });
       if (resp.ok) {
         router.refresh();
@@ -179,10 +190,10 @@ export function FormCliente(props: FormProps) {
 
             <FormField
               control={form.control}
-              name="tipo"
+              name="tipoClienteIdChar"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Tipo</FormLabel>
+                  <FormLabel>Tipo Cliente</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -193,10 +204,15 @@ export function FormCliente(props: FormProps) {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="taller">Taller</SelectItem>
-                      <SelectItem value="particular">Particular</SelectItem>
-                      <SelectItem value="comercio">Comercio</SelectItem>
-                      <SelectItem value="NA">Otro</SelectItem>
+                      {tipoClientes.map((item) => (
+                        <SelectItem key={item.id} value={item.id.toString()}>
+                          {item.name}
+                        </SelectItem>
+                      ))}
+
+                      <SelectItem value="particular">
+                        <Button variant="link">Agregar Nuevo</Button>
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />

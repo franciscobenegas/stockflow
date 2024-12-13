@@ -8,6 +8,8 @@ export async function POST(req: Request) {
     const session = await getServerSession(authOptions);
     const data = await req.json();
 
+    console.log("data ", data);
+
     if (!session?.user?.name) {
       return new Response("No tiene autorizacion para ejecuar este servicio", {
         status: 401,

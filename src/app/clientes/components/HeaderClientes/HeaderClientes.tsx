@@ -10,10 +10,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
+import { tipoCliente } from "@prisma/client";
 import { FormCliente } from "../FormCliente";
 
-export function HeaderClientes() {
+interface tipoClienteProps {
+  tipoClientes: tipoCliente[];
+}
+
+export function HeaderClientes(props: tipoClienteProps) {
+  const { tipoClientes } = props;
+
   const [openModal, setOpenModal] = useState(false);
   return (
     <div className="flex justify-between items-center ">
@@ -28,7 +34,10 @@ export function HeaderClientes() {
             <DialogTitle className="text-primary">Cliente</DialogTitle>
             <DialogDescription>Dar de alta un cliente</DialogDescription>
           </DialogHeader>
-          <FormCliente setOpenModal={setOpenModal} />
+          <FormCliente
+            setOpenModal={setOpenModal}
+            tipoClientes={tipoClientes}
+          />
         </DialogContent>
       </Dialog>
     </div>

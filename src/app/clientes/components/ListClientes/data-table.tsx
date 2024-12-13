@@ -207,14 +207,11 @@ export function DataTable({ data, tipoCliente }: DataTableProps) {
       },
       cell: ({ cell }) => {
         const tpoCli = tipoCliente.find(
-          (tpoCli) => tpoCli.id === cell.getValue()
+          (tpoCli) => tpoCli.id === cell.row.original.tipoClienteId
         );
-
         if (!tpoCli) return null;
-
         return (
           <div>
-            {/* <span className="font-bold">{tpoCli.nombre}</span> */}
             <Badge>{tpoCli.name}</Badge>
           </div>
         );
