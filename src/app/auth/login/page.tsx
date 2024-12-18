@@ -51,7 +51,7 @@ export default function LoginPage() {
           <div className="flex flex-col">
             <label htmlFor="email">Correo electrónico</label>
             <input
-              className="px-5 py-2 border bg-gray-200 rounded mb-5"
+              className="px-5 py-2 border bg-gray-200 rounded mb-5 dark:text-slate-800"
               type="email"
               {...register("email", {
                 required: {
@@ -71,7 +71,7 @@ export default function LoginPage() {
 
             <input
               type={isPasswordVisible ? "text" : "password"}
-              className="px-5 py-2 border bg-gray-200 rounded mb-5"
+              className="px-5 py-2 border bg-gray-200 rounded mb-5 dark:text-slate-800"
               {...register("password", {
                 required: {
                   value: true,
@@ -134,7 +134,10 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <Button disabled={isSubmitting} className="rounded-lg">
+            <Button
+              disabled={isSubmitting}
+              className="rounded-lg dark:bg-cyan-600 dark:text-slate-200"
+            >
               {isSubmitting && (
                 <LoaderCircle className="mr-2 h-5 w-5 animate-spin" />
               )}
@@ -150,7 +153,7 @@ export default function LoginPage() {
 
             <Link
               href="/auth/new-register"
-              className="btn-secondary text-center"
+              className="btn-secondary text-center hover:text-sky-600"
             >
               Crear una nueva cuenta
             </Link>

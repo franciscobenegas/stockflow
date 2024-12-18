@@ -54,7 +54,7 @@ export default function NewRegisterPage() {
         <div className="flex flex-col">
           <label htmlFor="username">Nombre Usuario</label>
           <input
-            className="px-5 py-2 border bg-gray-200 rounded mb-5"
+            className="px-5 py-2 border bg-gray-200 rounded mb-5 dark:text-slate-800"
             type="text"
             {...register("username", {
               required: {
@@ -72,7 +72,7 @@ export default function NewRegisterPage() {
 
           <label htmlFor="email">Correo electrónico</label>
           <input
-            className="px-5 py-2 border bg-gray-200 rounded mb-5"
+            className="px-5 py-2 border bg-gray-200 rounded mb-5 dark:text-slate-800"
             type="email"
             {...register("email", {
               required: {
@@ -91,7 +91,7 @@ export default function NewRegisterPage() {
 
           <label htmlFor="password">Contraseña</label>
           <input
-            className="px-5 py-2 border bg-gray-200 rounded mb-5"
+            className="px-5 py-2 border bg-gray-200 rounded mb-5 dark:text-slate-800"
             type="password"
             {...register("password", {
               required: {
@@ -113,7 +113,7 @@ export default function NewRegisterPage() {
 
           <label htmlFor="confirmPassword">Repetir Contraseña</label>
           <input
-            className="px-5 py-2 border bg-gray-200 rounded mb-5"
+            className="px-5 py-2 border bg-gray-200 rounded mb-5 dark:text-slate-800"
             type="password"
             {...register("confirmPassword", {
               required: {
@@ -151,7 +151,10 @@ export default function NewRegisterPage() {
             <div className="flex-1 border-t border-gray-500"></div>
           </div>
 
-          <Link href="/auth/login" className="btn-secondary text-center">
+          <Link
+            href="/auth/login"
+            className="btn-secondary text-center hover:text-sky-600"
+          >
             Ir al login
           </Link>
         </div>
