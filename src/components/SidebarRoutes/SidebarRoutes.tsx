@@ -9,7 +9,7 @@ import { NavMain } from "./components/nav-main";
 
 export function SidebarRoutes() {
   return (
-    <div className="flex flex-col justify-between h-full overflow-scroll">
+    <div className="flex flex-col justify-between h-full overflow-auto">
       <div>
         <div className="p-2 md:p-6">
           <p className=" text-primary mb-2 font-bold">GENERAL</p>

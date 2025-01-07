@@ -95,19 +95,23 @@ export default function Navbar() {
                       <div onClick={() => signIn()}>Iniciar</div>
                     </DropdownMenuItem>
                   </div>
-                  <DropdownMenuItem>Configuraciones</DropdownMenuItem>
-                  <DropdownMenuItem>Ayuda</DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <div className="md:hidden block">
-                      <ThemeColorToggle />
-                    </div>
+                  <DropdownMenuItem className="cursor-pointer">
+                    Configuraciones
                   </DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
+                    Ayuda
+                  </DropdownMenuItem>
+                  <div className="md:hidden block">
+                    <DropdownMenuItem>
+                      <ThemeColorToggle />
+                    </DropdownMenuItem>
+                  </div>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <div
                     onClick={() => signOut()}
-                    className="flex justify-between"
+                    className="flex justify-between cursor-pointer"
                   >
                     <p>Salir</p>
                     <Power className="h-10 w-10 mr-5" />

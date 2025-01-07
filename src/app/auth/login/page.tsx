@@ -36,7 +36,7 @@ export default function LoginPage() {
     if (!resp?.ok) {
       alert(resp?.error);
     } else {
-      router.push("/dashboard");
+      router.push("/");
       router.refresh();
     }
   });
