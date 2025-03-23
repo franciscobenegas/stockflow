@@ -37,7 +37,7 @@ export default function LoginPage() {
       alert(resp?.error);
     } else {
       router.push("/");
-      router.refresh();
+      //router.refresh(); // ver si funciona sin el refresh
     }
   });
 

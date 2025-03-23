@@ -16,8 +16,6 @@ export default async function TipoClienteIdPage({
     return redirect("/");
   }
 
-  console.log("Ver parametros", params.tipoclientesId);
-
   const tipoclienteFull = await prisma.tipoCliente.findUnique({
     where: {
       id: +params.tipoclientesId,

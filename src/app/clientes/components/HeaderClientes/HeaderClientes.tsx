@@ -32,7 +32,7 @@ export function HeaderClientes(props: tipoClienteProps) {
         <DialogContent className="sm:max-w-[625px]">
           <DialogHeader>
             <DialogTitle className="text-primary">Cliente</DialogTitle>
-            <DialogDescription>Dar de alta un cliente</DialogDescription>
+            <DialogDescription>Alta de un nuevo Cliente</DialogDescription>
           </DialogHeader>
           <FormCliente
             setOpenModal={setOpenModal}

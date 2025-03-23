@@ -25,7 +25,7 @@ interface tipoClienteFormProps {
 }
 
 const formSchema = z.object({
-  name: z.string().min(5),
+  name: z.string().min(2),
 });
 
 export function FormTipoCliente(props: tipoClienteFormProps) {

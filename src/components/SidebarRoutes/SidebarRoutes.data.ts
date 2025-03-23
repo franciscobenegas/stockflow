@@ -101,7 +101,7 @@ export const data = {
           url: "/tipoclientes",
         },
         {
-          title: "Cuentas",
+          title: "Cuentas por Cobrar",
           url: "#",
         },
       ],

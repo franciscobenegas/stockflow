@@ -74,25 +74,6 @@ export function DataTable({ data, tipoCliente }: DataTableProps) {
     []
   );
 
-  // const tipoCliente = [
-  //   {
-  //     id: "particular",
-  //     nombre: "Particular",
-  //   },
-  //   {
-  //     id: "comercio",
-  //     nombre: "Comercio",
-  //   },
-  //   {
-  //     id: "taller",
-  //     nombre: "Taller",
-  //   },
-  //   {
-  //     id: "NA",
-  //     nombre: "Otro",
-  //   },
-  // ];
-
   const [isMonted, setIsMonted] = useState(false);
   const [deletingCliente, setDeletingCliente] = useState<Cliente | null>(null);
   const [loading, setLoading] = useState(false); // Estado para el botón de carga
@@ -369,7 +350,11 @@ export function DataTable({ data, tipoCliente }: DataTableProps) {
                             column.toggleVisibility(!!value)
                           }
                         >
-                          {column.id === "userId" ? "Usuario" : column.id}
+                          {column.id === "userId"
+                            ? "Usuario"
+                            : column.id === "updatedAt"
+                            ? "Fecha Act."
+                            : column.id}
                         </DropdownMenuCheckboxItem>
                       );
                     }

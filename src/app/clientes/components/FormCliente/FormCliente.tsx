@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import { FilePlus, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 
 const formSchema = z.object({
   nombre: z.string().min(5),
@@ -109,13 +109,13 @@ export function FormCliente(props: FormProps) {
     }
   };
 
-  const AddTipoCliente = () => {
-    return (
-      <div className="bg-red-500">
-        <h2>hola</h2>
-      </div>
-    );
-  };
+  // const AddTipoCliente = () => {
+  //   return (
+  //     <div className="bg-red-500">
+  //       <h2>hola</h2>
+  //     </div>
+  //   );
+  // };
 
   return (
     <div>
@@ -217,11 +217,11 @@ export function FormCliente(props: FormProps) {
                           {item.name}
                         </SelectItem>
                       ))}
-                      <Button variant="link" onClick={AddTipoCliente}>
+                      {/* <Button variant="link" onClick={AddTipoCliente}>
                         <div className="flex gap-5">
                           Agregar <FilePlus />
                         </div>
-                      </Button>
+                      </Button> */}
                     </SelectContent>
                   </Select>
                   <FormMessage />
