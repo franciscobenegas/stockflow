@@ -17,7 +17,5 @@ export async function ListCategoria() {
     },
   });
 
-  console.log(categorias);
-
   return <DataTable data={categorias} />;
 }

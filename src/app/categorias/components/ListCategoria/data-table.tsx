@@ -170,14 +170,14 @@ export function DataTable({ data }: DataTableProps) {
               <Link href={`/categorias/${row.original.id}`}>
                 <DropdownMenuItem>
                   <Pencil className="w-4 h-4 mr-2" />
-                  Editar
+                  <p className="">Editar</p>
                 </DropdownMenuItem>
               </Link>
 
               <DropdownMenuItem
                 onClick={() => setDeletingCliente(row.original)}
               >
-                <Trash className="w-4 h-4 mr-2 text-red-500 font-bold" />
+                <Trash className="w-4 h-4 mr-2 text-red-500" />
                 <p className="text-red-500">Eliminar</p>
               </DropdownMenuItem>
             </DropdownMenuContent>

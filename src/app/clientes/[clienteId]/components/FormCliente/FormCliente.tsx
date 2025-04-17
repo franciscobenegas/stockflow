@@ -88,7 +88,7 @@ export function FormCliente(props: ClienteFormProops) {
           title: "Dato Actualizado!!! 😃",
           variant: "successful",
         });
-        router.refresh();
+        router.push("/clientes");
       }
     } catch (error) {
       toast({
