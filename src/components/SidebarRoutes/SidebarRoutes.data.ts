@@ -5,7 +5,6 @@ import {
   ShieldCheck,
   Calendar,
   ContactIcon,
-  LayoutDashboard,
   AudioWaveform,
   BookOpen,
   Bot,
@@ -16,6 +15,8 @@ import {
   PieChart,
   Settings2,
   SquareTerminal,
+  Ruler,
+  BoxesIcon,
 } from "lucide-react";
 
 export const dataGeneralSidebar = [
@@ -38,9 +39,14 @@ export const dataGeneralSidebar = [
 
 export const dataToolsSidear = [
   {
-    icon: LayoutDashboard,
+    icon: BoxesIcon,
     label: "Categorias",
     href: "/categorias",
+  },
+  {
+    icon: Ruler,
+    label: "Unidades",
+    href: "/unidades",
   },
   {
     icon: BarChart4,
