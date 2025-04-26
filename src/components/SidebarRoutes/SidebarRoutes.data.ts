@@ -45,8 +45,8 @@ export const dataToolsSidear = [
   },
   {
     icon: Ruler,
-    label: "Unidades",
-    href: "/unidades",
+    label: "Medidas",
+    href: "/medidas",
   },
   {
     icon: BarChart4,

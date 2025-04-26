@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,25 +10,25 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FromCategorias } from "../FromCategorias";
+import FormMedidas from "../FormMedidas/FormMedidas";
 
-export function HeaderCategorias() {
+export default function HeaderMedidas() {
   const [openModal, setOpenModal] = useState(false);
-
   return (
     <div className="flex justify-between items-center ">
-      <h2 className="text-2xl text-primary">Listado Categorias</h2>
+      <h2 className="text-2xl text-primary">Listado Unidade Medidas</h2>
 
       <Dialog open={openModal} onOpenChange={setOpenModal}>
         <DialogTrigger asChild>
-          <Button>Crear Categorias </Button>
+          <Button>Crear Unidades </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[625px]">
           <DialogHeader>
-            <DialogTitle>Categorias</DialogTitle>
-            <DialogDescription>Crear categorias</DialogDescription>
+            <DialogTitle>Medidas</DialogTitle>
+            <DialogDescription>Crear unidades medidas</DialogDescription>
           </DialogHeader>
-          <FromCategorias setOpenModal={setOpenModal} />
+          {/* <FromCategorias setOpenModal={setOpenModal} /> */}
+          <FormMedidas setOpenModal={setOpenModal} />
         </DialogContent>
       </Dialog>
     </div>

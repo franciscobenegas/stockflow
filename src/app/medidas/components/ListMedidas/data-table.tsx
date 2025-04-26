@@ -32,7 +32,7 @@ import {
   Settings2,
   Trash,
 } from "lucide-react";
-import { Categoria } from "@prisma/client";
+import { Medidas } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -59,10 +59,10 @@ import { formatDate } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 
 interface DataTableProps {
-  data: Categoria[];
+  data: Medidas[];
 }
 
-export function DataTable({ data }: DataTableProps) {
+export default function DataTableMedidas({ data }: DataTableProps) {
   const router = useRouter();
   const { toast } = useToast();
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -70,15 +70,13 @@ export function DataTable({ data }: DataTableProps) {
     []
   );
   const [isMonted, setIsMonted] = useState(false);
-  const [deletingCategoria, setDeletingCategoria] = useState<Categoria | null>(
-    null
-  );
+  const [deletingMedida, setDeletingMedida] = useState<Medidas | null>(null);
   const [loading, setLoading] = useState(false); // Estado para el botón de carga
   const handleDeleteConfirm = async () => {
-    if (deletingCategoria) {
+    if (deletingMedida) {
       setLoading(true); // Desactivar el botón
       try {
-        const resp = await fetch(`/api/categoria/${deletingCategoria.id}`, {
+        const resp = await fetch(`/api/medida/${deletingMedida.id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -90,7 +88,7 @@ export function DataTable({ data }: DataTableProps) {
             title: "Dato Eliminado!!! 👍",
             variant: "successful",
           });
-          setDeletingCategoria(null);
+          setDeletingMedida(null);
           router.refresh();
         }
       } catch (error) {
@@ -105,7 +103,7 @@ export function DataTable({ data }: DataTableProps) {
     }
   };
 
-  const columns: ColumnDef<Categoria>[] = [
+  const columns: ColumnDef<Medidas>[] = [
     {
       accessorKey: "nombre",
       header: ({ column }) => {
@@ -142,8 +140,7 @@ export function DataTable({ data }: DataTableProps) {
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Fecha Modif.
-            <ArrowUpDown className="ml-2 h-4 w-4" />
+            Fecha Modif. <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         );
       },
@@ -165,16 +162,14 @@ export function DataTable({ data }: DataTableProps) {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <Link href={`/categorias/${row.original.id}`}>
+              <Link href={`/medidas/${row.original.id}`}>
                 <DropdownMenuItem>
                   <Pencil className="w-4 h-4 mr-2" />
                   <p className="">Editar</p>
                 </DropdownMenuItem>
               </Link>
 
-              <DropdownMenuItem
-                onClick={() => setDeletingCategoria(row.original)}
-              >
+              <DropdownMenuItem onClick={() => setDeletingMedida(row.original)}>
                 <Trash className="w-4 h-4 mr-2 text-red-500" />
                 <p className="text-red-500">Eliminar</p>
               </DropdownMenuItem>
@@ -203,6 +198,7 @@ export function DataTable({ data }: DataTableProps) {
       columnFilters,
     },
   });
+
   if (!isMonted) {
     return null;
   }
@@ -248,7 +244,7 @@ export function DataTable({ data }: DataTableProps) {
                           {column.id === "usuarioId"
                             ? "Usuario"
                             : column.id === "updatedAt"
-                            ? "Fecha Modif."
+                            ? "Fecha Modificacion"
                             : column.id}
                         </DropdownMenuCheckboxItem>
                       );
@@ -315,20 +311,20 @@ export function DataTable({ data }: DataTableProps) {
 
         {/* Dialog para Eliminar */}
         <Dialog
-          open={!!deletingCategoria}
-          onOpenChange={() => setDeletingCategoria(null)}
+          open={!!deletingMedida}
+          onOpenChange={() => setDeletingMedida(null)}
         >
           <DialogContent>
             <DialogHeader>
               <DialogTitle className="text-primary">
-                Eliminar Categoria 🗑️
+                Eliminar Tipo Medida 🗑️
               </DialogTitle>
 
               <DialogDescription>
                 <p className="mt-2">
                   ¿Estás seguro de que deseas eliminar el registro de
                   <span className="font-bold italic">
-                    {" " + deletingCategoria?.nombre + " "}
+                    {" " + deletingMedida?.nombre + " "}
                   </span>
                   ? Esta acción no se puede deshacer.
                 </p>
@@ -338,7 +334,7 @@ export function DataTable({ data }: DataTableProps) {
               <DialogClose>
                 <Button
                   variant="outline"
-                  onClick={() => setDeletingCategoria(null)}
+                  onClick={() => setDeletingMedida(null)}
                 >
                   Cancelar
                 </Button>
