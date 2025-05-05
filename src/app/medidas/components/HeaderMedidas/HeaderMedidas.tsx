@@ -16,7 +16,7 @@ export default function HeaderMedidas() {
   const [openModal, setOpenModal] = useState(false);
   return (
     <div className="flex justify-between items-center ">
-      <h2 className="text-2xl text-primary">Listado Unidade Medidas</h2>
+      <h2 className="text-2xl text-primary">Listado Tipos de Medidas</h2>
 
       <Dialog open={openModal} onOpenChange={setOpenModal}>
         <DialogTrigger asChild>

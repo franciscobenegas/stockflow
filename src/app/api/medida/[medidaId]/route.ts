@@ -29,7 +29,7 @@ export async function PUT(
 
     return NextResponse.json(medidaUpd);
   } catch (error) {
-    console.log("[Categoria ID New] ", error);
+    console.log("[Medidas ID New] ", error);
     return new NextResponse("Error Interno", { status: 500 });
   }
 }

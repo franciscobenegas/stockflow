@@ -43,6 +43,7 @@ import {
 } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import Image from "next/image";
 
 const categorias = [
   { label: "Electrónica", value: "electronica" },
@@ -274,7 +275,7 @@ export default function FormularioProducto() {
               <FormField
                 control={form.control}
                 name="imagen"
-                render={({ field: { value, onChange, ...fieldProps } }) => (
+                render={() => (
                   <FormItem>
                     <FormLabel>Imagen del producto</FormLabel>
                     <FormControl>
@@ -286,10 +287,15 @@ export default function FormularioProducto() {
                           }
                         >
                           {imagenPreview ? (
-                            <img
+                            // <img
+                            //   src={imagenPreview || "/placeholder.svg"}
+                            //   alt="Vista previa"
+                            //   className="max-h-[150px] object-contain mb-2"
+                            // />
+                            <Image
                               src={imagenPreview || "/placeholder.svg"}
-                              alt="Vista previa"
-                              className="max-h-[150px] object-contain mb-2"
+                              alt="Vista Previa"
+                              className="max-h-[150px] object-contain mb-2 bg-red-500"
                             />
                           ) : (
                             <ImagePlus className="h-12 w-12 text-gray-400 mb-2" />
@@ -303,7 +309,6 @@ export default function FormularioProducto() {
                             accept="image/*"
                             className="hidden"
                             onChange={handleImagenChange}
-                            {...fieldProps}
                           />
                         </div>
                       </div>
