@@ -69,7 +69,7 @@ const data = {
       ],
     },
     {
-      title: "Models",
+      title: "Inventario",
       url: "#",
       icon: Bot,
       items: [

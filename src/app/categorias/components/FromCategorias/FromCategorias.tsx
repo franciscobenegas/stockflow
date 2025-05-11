@@ -19,6 +19,7 @@ import { LoaderCircle } from "lucide-react";
 
 const formSchema = z.object({
   nombre: z.string().min(2),
+  color: z.string(),
 });
 
 interface FormProps {
@@ -37,6 +38,7 @@ export function FromCategorias(props: FormProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       nombre: "",
+      color: "#2aade5",
     },
   });
 
@@ -94,6 +96,20 @@ export function FromCategorias(props: FormProps) {
                       type="text"
                       {...field}
                     />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="color"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Color</FormLabel>
+                  <FormControl>
+                    <Input type="color" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

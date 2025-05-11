@@ -25,6 +25,7 @@ interface CategoriaFormProps {
 
 const formSchema = z.object({
   nombre: z.string().min(2),
+  color: z.string(),
 });
 
 export function FormCategoria(props: CategoriaFormProps) {
@@ -36,12 +37,14 @@ export function FormCategoria(props: CategoriaFormProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       nombre: categoria.nombre,
+      color: categoria.color as string,
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const clienteAdd = {
       nombre: values.nombre,
+      color: values.color,
     };
 
     try {
@@ -88,6 +91,19 @@ export function FormCategoria(props: CategoriaFormProps) {
                     type="text"
                     {...field}
                   />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="color"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Color</FormLabel>
+                <FormControl>
+                  <Input type="color" {...field} />
                 </FormControl>
               </FormItem>
             )}

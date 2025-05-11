@@ -105,6 +105,19 @@ export function DataTable({ data }: DataTableProps) {
     }
   };
 
+  const ColorDisplay = ({ color }: { color: string }) => {
+    return (
+      <div className="flex items-center gap-2">
+        <div
+          className="w-6 h-6 rounded-full border border-gray-200"
+          style={{ backgroundColor: color }}
+          title={color}
+        />
+        <span className="text-sm text-muted-foreground">{color}</span>
+      </div>
+    );
+  };
+
   const columns: ColumnDef<Categoria>[] = [
     {
       accessorKey: "nombre",
@@ -117,6 +130,24 @@ export function DataTable({ data }: DataTableProps) {
             Nombre <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         );
+      },
+    },
+
+    {
+      accessorKey: "color",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Color <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ row }) => {
+        const color: string = row.getValue("color");
+        return <ColorDisplay color={color} />;
       },
     },
 

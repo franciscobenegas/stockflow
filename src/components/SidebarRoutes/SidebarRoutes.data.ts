@@ -6,17 +6,17 @@ import {
   Calendar,
   ContactIcon,
   AudioWaveform,
-  BookOpen,
-  Bot,
   Command,
   Frame,
   GalleryVerticalEnd,
   Map,
   PieChart,
   Settings2,
-  SquareTerminal,
   Ruler,
   BoxesIcon,
+  User,
+  ScanBarcode,
+  ShoppingBasket,
 } from "lucide-react";
 
 export const dataGeneralSidebar = [
@@ -95,7 +95,7 @@ export const data = {
     {
       title: "CLIENTE",
       url: "#",
-      icon: SquareTerminal,
+      icon: User,
       isActive: true,
       items: [
         {
@@ -113,13 +113,13 @@ export const data = {
       ],
     },
     {
-      title: "Models",
+      title: "Inventario",
       url: "#",
-      icon: Bot,
+      icon: ScanBarcode,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "Productos",
+          url: "/productos",
         },
         {
           title: "Explorer",
@@ -132,9 +132,9 @@ export const data = {
       ],
     },
     {
-      title: "Documentation",
+      title: "Ventas",
       url: "#",
-      icon: BookOpen,
+      icon: ShoppingBasket,
       items: [
         {
           title: "Introduction",
@@ -155,7 +155,7 @@ export const data = {
       ],
     },
     {
-      title: "Settings",
+      title: "Configuraciones",
       url: "#",
       icon: Settings2,
       items: [

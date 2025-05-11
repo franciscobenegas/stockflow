@@ -84,11 +84,12 @@ model Categoria {
   usuarioId   String
   createdAt   DateTime    @default(now())
   updatedAt   DateTime?   @updatedAt
+  color       String?
 }
 
 model Medidas{
-  id Int  @id @default(autoincrement())
-  nombre String
+  id          Int  @id @default(autoincrement())
+  nombre      String
   productos   Producto[]
   usuarioId   String
   createdAt   DateTime    @default(now())

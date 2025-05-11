@@ -11,6 +11,7 @@ export async function PUT(
     const session = await getServerSession(authOptions);
     const { categoriaId } = params;
     const values = await req.json();
+    console.log("valores", values);
 
     if (!session?.user?.name) {
       return new Response("No tiene autorizacion para ejecuar este servicio", {
