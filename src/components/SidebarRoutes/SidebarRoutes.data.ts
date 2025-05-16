@@ -122,11 +122,11 @@ export const data = {
           url: "/productos",
         },
         {
-          title: "Explorer",
+          title: "Lista de Precios",
           url: "#",
         },
         {
-          title: "Quantum",
+          title: "Ajuste Inventario",
           url: "#",
         },
       ],
@@ -137,19 +137,39 @@ export const data = {
       icon: ShoppingBasket,
       items: [
         {
-          title: "Introduction",
+          title: "Clientes",
           url: "#",
         },
         {
-          title: "Get Started",
+          title: "Ordenes de Venta",
           url: "#",
         },
         {
-          title: "Tutorials",
+          title: "Paquetes",
           url: "#",
         },
         {
-          title: "Changelog",
+          title: "Envios",
+          url: "#",
+        },
+        {
+          title: "Facturas",
+          url: "#",
+        },
+        {
+          title: "Recibos de Ventas",
+          url: "#",
+        },
+        {
+          title: "Pagos Recibidos",
+          url: "#",
+        },
+        {
+          title: "Devoluciones Ventas",
+          url: "#",
+        },
+        {
+          title: "Notas de Crédito",
           url: "#",
         },
       ],
