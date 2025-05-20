@@ -1,4 +1,4 @@
-import { BookOpenCheck, UserRound, Waypoints } from "lucide-react";
+import { BookOpenCheck, Calendar, UserRound, Waypoints } from "lucide-react";
 import { CardSummary } from "../components/CardSummary";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../authOptions";
@@ -7,6 +7,7 @@ import { UltimosClientes } from "../components/UltimosClientes";
 import { SalesDistributors } from "../components/SalesDistributors";
 import { TotalSuscripciones } from "../components/TotalSuscripciones";
 import { ListaIntegrados } from "../components/ListaIntegrados";
+import { Separator } from "@/components/ui/separator";
 
 const dataCardSummary = [
   {
@@ -34,15 +35,35 @@ const dataCardSummary = [
 
 const DashboardPage = async () => {
   const session = await getServerSession(authOptions);
-  console.log(session);
+  //console.log(session);
 
   if (!session.user.name) {
     redirect("/auth/login");
   }
 
+  const obtenerFecha = () => {
+    const fecha = new Date();
+    const opciones = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return fecha.toLocaleDateString("es-ES", opciones);
+  };
+
   return (
     <div>
-      <h1 className="text-primary">Menu DashBoard</h1>
+      <div className="flex items-center  pb-4 justify-between">
+        <div>
+          <h1 className="text-primary text-3xl font-bold ">Dashboard</h1>
+          <div className="flex items-center gap-2 text-muted-foreground mt-1">
+            <Calendar className="h-4 w-4" />
+            <p>{obtenerFecha()}</p>
+          </div>
+        </div>
+      </div>
+      <Separator className="mb-5" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-x-20">
         {dataCardSummary.map(({ icon, total, average, title, tooltipText }) => (
           <CardSummary

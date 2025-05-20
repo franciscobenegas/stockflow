@@ -31,7 +31,7 @@ export function TotalSuscripciones() {
         <div className="shadow font-bold">
           <CustomIcon icon={Percent} />
         </div>
-        <p className="text-xl text-primary">Total Suscriptos</p>
+        <p className="text-xl text-primary font-semibold">Total Suscriptos</p>
       </div>
       <div className="w-full h-[200px] p-5">
         <ResponsiveContainer aspect={1} maxHeight={200}>
